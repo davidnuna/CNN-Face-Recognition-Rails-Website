@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Facial recognition image</h1>
+    <h2>Please upload a picture as clear as possible with you</h2>
+    <h2>The picture should only contain your face attributes and optionally hair  </h2>
+    
+    <%= form_with model: @login_attempt, url: logins_path, local: true, method: :post do |form| %>
+      <span class="image">
+        <%= form.file_field :login_image, accept: "image/png,image/jpeg" %>
+      </span>
+  
+      <%= form.submit "Confirm", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="center jumbotron">
+  <h1>Face Recognition Application</h1>
+  <% if current_user.present? %>
+    <h3>Welcome!</h3>
+    <br>
+    <%= image_tag current_user.user_image %>
+    <h4><%= current_user.email %></h4>
+  <% else %>
+    <h2>Please log in as either a standard user or an admin</h2>
+    <%= link_to "Standard Login", new_login_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Admin Login", 'admin_login_path', class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
