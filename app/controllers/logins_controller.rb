@@ -2,7 +2,7 @@ class LoginsController < ApplicationController
   before_action :load_login_attempt, only: [:select_user, :choose_user, :login_page]
   
   def index
-    @logins = LoginAttempt.order("created_at ASC").where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
+    @logins = LoginAttempt.order("created_at DESC").where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
   end
   
   def new

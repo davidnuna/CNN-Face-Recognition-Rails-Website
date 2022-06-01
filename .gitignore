@@ -31,6 +31,7 @@
 /face_recognition/cnn_implementation_YALE/YALE_database
 /face_recognition/cnn_implementation_YALE/model.h5
 /face_recognition/cnn_implementation_YALE/output
+/face_recognition/cnn_implementation_YALE/__pycache__
 /face_recognition/siamese_implementation_ORL/ORL_database
 /face_recognition/siamese_implementation_ORL/examples
 /face_recognition/siamese_implementation_YALE/YALE_database
