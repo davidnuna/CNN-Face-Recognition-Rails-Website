@@ -26,5 +26,13 @@
 /public/packs-test
 /node_modules
 /yarn-error.log
+/storage
+/face_recognition/cnn_implementation_ORL/ORL_database
+/face_recognition/cnn_implementation_YALE/YALE_database
+/face_recognition/cnn_implementation_YALE/output
+/face_recognition/siamese_implementation_ORL/ORL_database
+/face_recognition/siamese_implementation_ORL/examples
+/face_recognition/siamese_implementation_YALE/YALE_database
+/face_recognition/siamese_implementation_YALE/examples
 yarn-debug.log*
 .yarn-integrity
