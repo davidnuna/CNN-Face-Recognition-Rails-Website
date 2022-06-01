@@ -1,11 +1,8 @@
 class LoginsController < ApplicationController
-
   before_action :load_login_attempt, only: [:select_user, :choose_user, :login_page]
-
-  def show
-  end
   
   def index
+    @logins = LoginAttempt.order("created_at ASC").where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
   end
   
   def new
@@ -14,9 +11,15 @@ class LoginsController < ApplicationController
 
   # Add validations and stuff (flashes)
   def create
-    @params = params.required(:login_attempt).permit(:login_image)
-    @login_attempt = LoginAttempt.new(@params)
+    if params[:login_attempt][:login_image_uploaded].blank? && params[:login_attempt][:login_image_camera].blank?
+      redirect_to new_login_path, alert: 'No photo has been captured/uploaded!'
+      return
+    end
 
+    @login_attempt = LoginAttempt.create!
+    login_image, login_method = LoginImage::LoginImageFactory.new(params).login_image
+
+    login_method == 'camera' ? @login_attempt.login_image.attach(io: login_image, filename: 'login_image.jpeg') : @login_attempt.login_image.attach(login_image)
     if @login_attempt.login_image.attached? && @login_attempt.save
       redirect_to select_user_login_path(@login_attempt)
     else
@@ -25,17 +28,17 @@ class LoginsController < ApplicationController
   end
   
   def select_user
-    @users = FaceClassification.new(@login_attempt.login_image).classify
+    @users = FaceClassification.instance.classify(@login_attempt.login_image)
   end
   
   def choose_user
-    operation_succeeded = @login_attempt.update(user_id: params[:user_id], status: :user_selected)
-    
-    if operation_succeeded
-      redirect_to login_page_login_path(@login_attempt)
-    else
-      render json: 'ERROR'
+    if params[:user_id].blank?
+      redirect_to select_user_login_path(@login_attempt), alert: 'No user has been selected!'
+      return
     end
+
+    @login_attempt.update!(user_id: params[:user_id], status: :user_selected)
+    redirect_to login_page_login_path(@login_attempt)
   end
   
   def login_page

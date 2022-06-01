@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_094926) do
+ActiveRecord::Schema.define(version: 2022_05_10_071109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,9 +50,56 @@ ActiveRecord::Schema.define(version: 2022_04_02_094926) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "quiz_id"
+    t.string "name"
+    t.string "answer_1"
+    t.string "answer_2"
+    t.string "answer_3"
+    t.string "answer_4"
+    t.string "correct_answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.integer "difficulty", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "quiz_id"
+    t.integer "status", default: 0
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quiz_id"], name: "index_results_on_quiz_id"
+    t.index ["user_id", "quiz_id"], name: "index_results_on_user_id_and_quiz_id", unique: true
+    t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.integer "result_id"
+    t.string "given_answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_user_answers_on_question_id"
+    t.index ["result_id"], name: "index_user_answers_on_result_id"
+    t.index ["user_id", "question_id", "result_id"], name: "index_user_answers_on_user_id_and_question_id_and_result_id", unique: true
+    t.index ["user_id"], name: "index_user_answers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "user_class", null: false
+    t.string "first_name", default: ""
+    t.string "last_name", default: ""
     t.boolean "admin", default: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -62,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_094926) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["user_class"], name: "index_users_on_user_class", unique: true
+    t.index ["user_class"], name: "index_users_on_user_class"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

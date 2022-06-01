@@ -1,0 +1,24 @@
+<h1 style="padding-bottom: 40px"><%= @quiz.name %></h1>
+
+<%= form_with(url: answer_quiz_path, scope: :question, local: true) do |form| %>
+
+  <% @questions.each_with_index do |question, index| %>
+    <h2 style="margin-bottom: 0; font-size: 1.8em"> <%= "#{index+1}. #{question.name}" %> </h2>
+    <br>
+    <% [question.answer_1, question.answer_2, question.answer_3, question.answer_4].each do |answer| %>
+      <%= render :partial => 'answer', locals: { form: form, question: question, answer: answer} %>
+    <% end %>
+    <br>
+  <% end %>
+
+  <br>
+  <% if @user_answers.present? %>
+    <h1>Result: <%= @quiz.user_score(current_user) %>/<%= @questions.count %></h1>
+  <% else %>
+    <%= form.submit "Submit answers", class: "btn btn-primary" %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+  
+<% end %>

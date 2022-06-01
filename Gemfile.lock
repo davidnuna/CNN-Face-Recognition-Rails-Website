@@ -54,6 +54,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.1.5)
       activesupport (= 6.1.5)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.1.5)
       activemodel (= 6.1.5)
       activesupport (= 6.1.5)
@@ -92,6 +96,17 @@ GEM
       sassc (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.3)
+    capybara (3.37.1)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
+    childprocess (4.1.0)
+    choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     countries (5.0.0)
@@ -116,6 +131,13 @@ GEM
       devise (>= 4.0)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    draper (4.0.2)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
+      ruby2_keywords
     e2mmap (0.1.0)
     erubi (1.10.0)
     execjs (2.8.1)
@@ -152,6 +174,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     mimemagic (0.3.10)
       nokogiri (~> 1)
@@ -163,7 +186,6 @@ GEM
     nokogiri (1.13.3-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (4.11.0)
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
@@ -205,6 +227,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.6.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (6.1.5)
@@ -262,7 +289,11 @@ GEM
     rubocop-rspec (2.3.0)
       rubocop (~> 1.0)
       rubocop-ast (>= 1.1.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -276,6 +307,11 @@ GEM
     seed_dump (3.3.1)
       activerecord (>= 4)
       activesupport (>= 4)
+    selenium-webdriver (4.2.1)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     semantic_range (3.0.0)
     simple_po_parser (1.1.6)
     simplecov (0.21.2)
@@ -322,6 +358,10 @@ GEM
     vcr (6.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webdrivers (5.0.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (~> 4.0)
     webmock (3.14.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -332,11 +372,15 @@ GEM
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
     webrick (1.7.0)
+    websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.0)
     with_advisory_lock (4.6.0)
       activerecord (>= 4.2)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
     yard (0.9.27)
       webrick (~> 1.7.0)
     zeitwerk (2.5.4)
@@ -353,24 +397,26 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap-sass (= 3.4.1)
   byebug
+  capybara
   countries
   dalli
   database_cleaner-active_record
   devise (~> 4.7, = 4.7.3)
   devise-async
+  draper
   factory_bot_rails
   faker!
   jsonapi-serializer
   letter_opener
   listen (~> 3.4, >= 3.4.1)
   mimemagic (~> 0.3.10)
-  pagy (~> 4.1)
   pg
   pry-byebug
   puma (~> 5.2, >= 5.2.2)
   rack-attack
   rack-cors
   rails (~> 6.1, >= 6.1.4.4)
+  rails-erd
   request_store
   rspec-rails
   rubocop (~> 1.12.1)
@@ -378,6 +424,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.3.0)
   sass-rails
   seed_dump
+  selenium-webdriver
   simplecov
   solargraph
   spring
@@ -385,8 +432,10 @@ DEPENDENCIES
   turbolinks
   tzinfo-data
   vcr
+  webdrivers
   webmock
   webpacker (~> 5.0)
+  will_paginate (= 3.3.0)
   with_advisory_lock
 
 RUBY VERSION

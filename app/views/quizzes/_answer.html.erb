@@ -1,0 +1,23 @@
+<div class="row" style="margin-bottom: 0">
+  <div class="col-md-offset-5 col-md-1" style="padding-right: 0; margin-right: -30px">
+    <%= form.radio_button "#{question.id}", answer, checked: @user_answers.try(:[], question.id) == answer, disabled: @user_answers.present?, class: "custom-control-input", style: "cursor: pointer; margin-top: 9px"%>
+  </div>
+
+  <% if @user_answers.present? %>
+    <% answer_class = 'none' %>
+    <% if question.correct_answer == answer %>
+      <% answer_class = 'correct' %>
+    <% elsif @user_answers[question.id] == answer %>
+      <% answer_class = 'wrong' %>
+    <% end %>
+    <%= form.label "#{question.id}", answer, class: "#{answer_class}", style: "font-size: 1.5em" %>
+
+    <% if @user_answers[question.id] == question.correct_answer && question.correct_answer == answer %>
+      <span style="font-size: 1.5em">&#10003</span>
+    <% elsif answer_class == 'wrong' %>
+      <span style="color: darkred; padding-left: 3px; font-size: 1.2em">&#10060</span>
+    <% end %>
+  <% else %>
+    <%= form.label "label_#{question.id}", answer, style: "font-size: 1.5em" %>
+  <% end %>
+</div>

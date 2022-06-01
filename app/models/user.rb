@@ -5,8 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :login_attempts
-
   has_one_attached :user_image
+
+  has_many :created_quizzes, class_name: 'Quiz'
+
+  has_many :results, dependent: :destroy
+  has_many :quizzes, through: :results, source: :quiz
 
   attr_accessor :probability
 end

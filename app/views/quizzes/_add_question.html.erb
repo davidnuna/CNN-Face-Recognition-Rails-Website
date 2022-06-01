@@ -1,0 +1,28 @@
+<div class="new_question">
+  <h1 style="font-size: 1.5em">Question <%= question_number %></h1>
+
+  <div style="width: 100%; text-align: center">
+    <%= text_field_tag "quiz[questions][#{question_number}][name]", nil, placeholder: "Your question...", style: "width: 55%" %>
+  </div>
+
+  <div style="width: 100%; text-align: center">
+    <%= radio_button_tag "quiz[questions][#{question_number}][correct_answer]", 1, false, class: "custom-control-input", style: "cursor: pointer; margin-top: 9px" %>
+    <%= text_field_tag "quiz[questions][#{question_number}][answer_1]", nil, placeholder: "Answer 1...", style: "width: 50%; margin-left: 10px" %>
+  </div>
+
+  <div style="width: 100%; text-align: center">
+    <%= radio_button_tag "quiz[questions][#{question_number}][correct_answer]", 2, false, class: "custom-control-input", style: "cursor: pointer; margin-top: 9px" %>
+    <%= text_field_tag "quiz[questions][#{question_number}][answer_2]", nil, placeholder: "Answer 2...", style: "width: 50%; margin-left: 10px" %>
+  </div>
+
+  <div style="width: 100%; text-align: center">
+    <%= radio_button_tag "quiz[questions][#{question_number}][correct_answer]", 3, false, class: "custom-control-input", style: "cursor: pointer; margin-top: 9px" %>
+    <%= text_field_tag "quiz[questions][#{question_number}][answer_3]", nil, placeholder: "Answer 3...", style: "width: 50%; margin-left: 10px" %>
+  </div>
+
+  <div style="width: 100%; text-align: center">
+    <%= radio_button_tag "quiz[questions][#{question_number}][correct_answer]", 4, false, class: "custom-control-input", style: "cursor: pointer; margin-top: 9px" %>
+    <%= text_field_tag "quiz[questions][#{question_number}][answer_4]", nil, placeholder: "Answer 4...", style: "width: 50%; margin-left: 10px" %>
+  </div>
+</div>
+<br>

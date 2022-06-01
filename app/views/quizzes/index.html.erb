@@ -1,0 +1,19 @@
+<h1>All Quizzes</h1>
+
+<% if current_user.admin?%>
+  <% if current_user.admin?%>
+    <div class="row">
+      <div class="col-md-offset-10 col-md-2" style="padding-left: 60px">
+        <a href="<%= new_quiz_path %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Quiz</a> </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= will_paginate %>
+
+<div class="list-group">
+  <%= render @quizzes %>
+</div>
+
+<%= will_paginate %>
+

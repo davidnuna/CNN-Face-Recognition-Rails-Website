@@ -2,14 +2,28 @@
   <aside class="col-md-6">
     <section class="user_info">
       <div class="col-md-3 user_image">
-        <%= image_tag current_user.user_image %>
+        <%= image_tag @user.user_image %>
+        <% if @user.admin? %>
+          <p class="teacher"> teacher </p>
+        <% else %>
+          <p class="student"> student </p>
+        <% end %>
       </div>
       <div class="col-md-9">
-        <h4> <%= @user.email %> </h4>
+        <h4 style="margin: 0"> <%= @user.email %> </h4>
+        <h4> <%= @user.full_name %> </h4>
       </div>
-      <% if @user.admin? %>
-        <p class="admin"> admin </p>
-      <% end %>
     </section>
   </aside>
+
+  <h1>Solved Quizzes</h1>
+  <div class="col-md-6">
+    <%= will_paginate @quizzes %>
+
+    <div class="list-group">
+      <%= render :partial => 'quizzes/quiz', :collection => @quizzes, as: :quiz %>
+    </div>
+
+    <%= will_paginate @quizzes %>
+  </div>
 </div>

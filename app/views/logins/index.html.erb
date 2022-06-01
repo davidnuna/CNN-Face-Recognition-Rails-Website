@@ -1,0 +1,11 @@
+<h1>My Login Attempts</h1>
+
+<div>
+  <%= will_paginate %>
+
+  <div class="list-group">
+    <%= render :partial => 'logins/login_attempt', :collection => @logins, as: :login_attempt %>
+  </div>
+
+  <%= will_paginate %>
+</div>

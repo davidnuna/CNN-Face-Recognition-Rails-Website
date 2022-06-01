@@ -1,0 +1,12 @@
+<div class="row list-group-item list-group-item-action active" style="margin-bottom: 5%">
+  <div class="col-md-2" style="padding: 0; padding-top: 15px; padding-bottom: 15px; padding-left: 15px">
+    <%= image_tag login_attempt.login_image, class: 'login_image', width: 110, height: 122 %>
+  </div>
+  <div class="col-md-10" style="padding: 0">
+    <h3 style="font-size: 1.2em; margin-bottom: 0; margin-top: 0; padding-top: 15px; padding-right: 15px; text-align: right">Status: <%= login_attempt.status %></h3>
+    <br>
+    <br>
+    <h3 style="font-size: 1em; margin-bottom: 0; margin-top: 0; padding-top: 15px; padding-right: 15px; text-align: right">Started at: <%= login_attempt.created_at %></h3>
+    <h3 style="font-size: 1em; margin-bottom: 0; margin-top: 0; padding-top: 15px; padding-right: 15px; text-align: right">Completed at: <%= login_attempt.updated_at %></h3>
+  </div>
+</div>

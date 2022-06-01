@@ -11,6 +11,8 @@ gem 'pg'
 
 gem 'dalli'
 
+gem 'draper'
+
 gem 'rack-attack'
 
 gem 'activerecord-import'
@@ -35,7 +37,7 @@ gem 'rack-cors'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'pagy', '~> 4.1'
+gem 'will_paginate', '3.3.0'
 
 gem 'mimemagic', '~> 0.3.10'
 
@@ -48,6 +50,7 @@ gem 'countries'
 gem 'with_advisory_lock'
 
 group :development, :test do
+  gem 'rails-erd', group: :development
   gem 'annotate'
   gem 'listen', '~> 3.4', '>= 3.4.1'
 
@@ -61,6 +64,9 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'webdrivers'
+  gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'database_cleaner-active_record'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

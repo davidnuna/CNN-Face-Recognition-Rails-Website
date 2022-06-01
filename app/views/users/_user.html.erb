@@ -1,0 +1,18 @@
+<%= link_to user do %>
+  <li>
+    <section class="user_info">
+      <div class="col-md-2 user_image">
+        <%= image_tag user.user_image %>
+        <% if user.admin? %>
+          <p class="teacher"> teacher </p>
+        <% else %>
+          <p class="student"> student </p>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <h4 style="margin: 0"> <%= user.email %> </h4>
+        <h4> <%= user.first_name %> <%= user.last_name %> </h4>
+      </div>
+    </section>
+  </li>
+<% end %>

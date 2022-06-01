@@ -3,7 +3,6 @@
     <h1>Log in</h1>
     <h2>Please provide the password for the previously chosen user</h2>
 
-    <h2 class="alert"><%= alert %></h2>
     <%= form_with(url: user_session_path, scope: :user, local: true) do |form| %>
       <%= form.label :email %>
       <%= form.email_field :email, value: @user.email, readonly: true, class: "form-control" %>

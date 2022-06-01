@@ -1,0 +1,13 @@
+<%= link_to quiz do %>
+  <div class="row quiz list-group-item list-group-item-action active" style="margin-bottom: 5%; cursor: pointer;">
+    <h1 style="margin-bottom: 15px"><%= quiz.name %></h1>
+    <h3 style="font-size: 1.2em; margin: 0; text-align: center"><%= pluralize(quiz.questions.count, 'question') %> (<%= quiz.difficulty %>)</h3>
+    <br>
+    <br>
+    <% if @user_scores.try(:[], quiz.id).present? %>
+      <h3 style="font-size: 1.1em; text-align: center"><%= @quiz_statuses[quiz.id].capitalize %> (<%= @user_scores[quiz.id] %>/<%= quiz.questions.count %>)</h3>
+  <% else %>
+      <h3 style="font-size: 1.1em; text-align: center"><%= @quiz_statuses.try(:[], quiz.id)&.capitalize || "Not started"%></h3>
+  <% end %>
+  </div>
+<% end %>

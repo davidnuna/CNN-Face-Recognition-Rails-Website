@@ -1,0 +1,24 @@
+<h1 style="padding-bottom: 40px">Create a quiz</h1>
+
+<%= form_with model: @quiz, url: quizzes_path, local: true, method: :post do |form| %>
+  <h2 style="font-size: 1.8em; text-align: left; margin-bottom: 10px">Choose a name and select a difficulty</h2>
+  <%= form.label :name %>
+  <%= form.text_field :name, class: "form-control" %>
+  <%= form.label :difficulty %>
+  <%= form.select :difficulty, options_for_select(%w[easy medium hard]), prompt: 'Choose a difficulty', class: "form-control" %>
+
+  <h2 style="font-size: 1.8em; text-align: left; margin-bottom: 10px">Create some questions</h2>
+
+  <div id="added_questions">
+    
+  </div>
+
+  <%= link_to 'Add a question', '', style: "width: 100%; background-color: #2E2F30; color: white", id: "add_question", class: "btn btn-dark" %>
+
+  <br>
+  <br>
+  <%= form.submit "Create quiz", class: "btn btn-primary" %>
+<% end %>
+<br>
+<br>
+<br>

@@ -4,12 +4,21 @@ Rails.application.routes.draw do
 
   get '/home' => 'pages#home'
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
   
-  resources :logins, only: [:show, :index, :new, :create] do
-    get :select_user, :on => :member
-    post :choose_user, :on => :member
-    get :login_page, :on => :member
+  resources :logins, only: [:index, :new, :create] do
+    member do
+      get :select_user
+      post :choose_user
+      get :login_page
+    end
+  end
+
+  get 'quizzes/add_question' => 'quizzes#add_question'
+  resources :quizzes, only: [:index, :show, :new, :create] do
+    member do
+      post :answer
+    end
   end
   
 end
