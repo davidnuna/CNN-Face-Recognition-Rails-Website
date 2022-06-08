@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import os
 import pickle
 import matplotlib.pyplot as plt
+from keras.utils.vis_utils import plot_model
 
 from keras.models import Sequential
 from tensorflow.keras.optimizers import RMSprop
@@ -49,13 +50,14 @@ def train_model():
     print(len(train_array))
 
     model = create_model(image_shape = (64, 64, 1))
+    plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
 
     train_images, train_labels = np.array([t[0] for t in train_array]), np.array([t[1] for t in train_array])
     test_images, test_labels = np.array([t[0] for t in test_array]), np.array([t[1] for t in test_array])
 
     history = model.fit(train_images, train_labels,
                         batch_size=64,
-                        epochs=15,
+                        epochs=20,
                         verbose=2,
                         validation_data=(test_images, test_labels))
 

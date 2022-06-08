@@ -3,6 +3,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import Lambda
 from tensorflow.keras.datasets import mnist
+from keras.utils.vis_utils import plot_model
 from random import randint
 import numpy as np
 import cv2
@@ -32,7 +33,7 @@ for dir in os.listdir(path):
     class_index = os.listdir(path).index(dir)
     for idx, img in enumerate(sorted(os.listdir(path + dir))):
         image = cv2.imread(path + dir + '/' + img, 0)
-        image = cv2.resize(image, (32, 32))
+        image = cv2.resize(image, (64, 64))
         image = image[:, :, np.newaxis]
         if (idx+1) % 8 == 0:
             test_images.append(image)
@@ -64,8 +65,9 @@ featsB = featureExtractor(imgB)
 distance = Lambda(utils.euclidean_distance)([featsA, featsB])
 outputs = Dense(1, activation="sigmoid")(distance)
 model = Model(inputs=[imgA, imgB], outputs=outputs)
+plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+model.summary()
 
-#
 print("[INFO] compiling model...")
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 

@@ -1,9 +1,9 @@
 import os
 
-IMG_SHAPE = (32, 32, 1)
+IMG_SHAPE = (64, 64, 1)
 
-BATCH_SIZE = 15
-EPOCHS = 150
+BATCH_SIZE = 16
+EPOCHS = 200
 
 BASE_OUTPUT = "output"
 MODEL_PATH = os.path.sep.join([BASE_OUTPUT, "model.h5"])
