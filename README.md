@@ -1,24 +1,7 @@
-# README
+# CNN-Face-Recognition-Rails-Website
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A CNN based Face Recognition website, final year thesis project (2022, Computer Science Bachelor's Degree). The Face Recognition model has been built using the tensorflow library (python), white the integration website is a monolith Ruby on Rails application.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The website functions as a quiz management system that can be used by 2 types of users:
+- Teachers - standard authentication, create quizzes, browse students
+- Students - face recognition authentication, solve quizzes, browse login attempts
